@@ -37,6 +37,10 @@ def get_frame():
 def process_frame(frame):
   decoded_objs = decode(frame)
   draw_positions(frame, decoded_objs)
+  font = cv2.FONT_HERSHEY_SIMPLEX
+  #QRコードいくつ見つけたかを文字で表示
+  cv2.putText(frame,'Detected QR codes:' + str(len(decoded_objs)),
+              (decoded_objs[0].rect[0], decoded_objs[0].rect[1] - 30),font,1,(255,0,0),1,cv2.LINE_AA)
 
 def decode(frame):
   decoded_objs = pyzbar.decode(frame, scan_locations=True)
@@ -50,11 +54,13 @@ def decode(frame):
 def draw_positions(frame, decoded_objs):
   for decoded_obj in decoded_objs:
     left, top, width, height = decoded_obj.rect
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    #QRコードのデータをそれぞれ表示する
+    cv2.putText(frame,'Data:' + str(decoded_obj.data.decode('utf-8'),
+              (decoded_objs[0].rect[0], decoded_objs[0].rect[1]),font,1,(255,0,0),1,cv2.LINE_AA)
+
     frame = cv2.rectangle(frame, (left, top), (left + width, height + top),
                         (255, 0, 0), 2)
-    
-  font = cv2.FONT_HERSHEY_SIMPLEX
-  cv2.putText(frame,'Detected QR codes:' + str(len(decoded_objs)),(decoded_objs[0].rect[0], decoded_objs[0].rect[1]),font,1,(255,0,0),1,cv2.LINE_AA)
                         
 if __name__ == '__main__':
   app.run(host="0.0.0.0", debug=False, threaded=True)
