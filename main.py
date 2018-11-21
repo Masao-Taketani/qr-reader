@@ -37,9 +37,9 @@ def get_frame():
 def process_frame(frame):
   decoded_objs = decode(frame)
   draw_positions(frame, decoded_objs)
-  for i in len(decoded_obj):
+  for i in len(decoded_objs):
     font = cv2.FONT_HERSHEY_SIMPLEX
-    cv2.putText(frame,'Detected QR codes:',(50, 10),font,0.5,(255,255,255),1,cv2.LINE_AA)
+    cv2.putText(frame,'Detected QR codes:' + str(len(decoded_objs)),(50, 10),font,0.5,(255,255,255),1,cv2.LINE_AA)
 
 def decode(frame):
   decoded_objs = pyzbar.decode(frame, scan_locations=True)
