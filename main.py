@@ -37,9 +37,10 @@ def get_frame():
 def process_frame(frame):
   decoded_objs = decode(frame)
   draw_positions(frame, decoded_objs)
+  print('drow_positions', draw_positions(frame, decoded_objs))
   
   font = cv2.FONT_HERSHEY_SIMPLEX
-  cv2.putText(frame,'Detected QR codes:',(50, 10),font,0.5,(255,255,255),1,cv2.LINE_AA)
+  cv2.putText(frame,'Detected QR codes:',(50, 10),font,1,(255,0,0),1,cv2.LINE_AA)
   print('len(decoded_objs)', decoded_objs)
 
 def decode(frame):
