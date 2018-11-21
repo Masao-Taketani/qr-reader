@@ -48,8 +48,8 @@ def decode(frame):
   
 def draw_positions(frame, decoded_objs):
   for decoded_obj in decoded_objs:
-  left, top, width, height = decoded_obj.rect
-  frame = cv2.rectangle(frame, (left, top), (left + width, height + top),
+    left, top, width, height = decoded_obj.rect
+    frame = cv2.rectangle(frame, (left, top), (left + width, height + top),
                         (0, 255, 0), 2)
                         
 if __name__ == '__main__':
